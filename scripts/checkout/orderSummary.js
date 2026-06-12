@@ -13,6 +13,10 @@ export function renderOrderSummary() {
     const productId = cartItem.productId;
 
     const matchingProduct = getProduct(productId);
+    if (!matchingProduct) {
+      console.warn(`Skipping cart item with missing product: ${productId}`);
+      return;
+    }
 
     const deliveryOptionId = cartItem.deliveryOptionId;
 

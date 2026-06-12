@@ -9,6 +9,11 @@ export function renderPaymentSummary() {
 
   cart.forEach((cartItem) => {
     const product = getProduct(cartItem.productId);
+    if (!product) {
+      console.warn(`Skipping payment summary item with missing product: ${cartItem.productId}`);
+      return;
+    }
+
     productPriceCents += product.priceCents * cartItem.quantity;
 
     const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
